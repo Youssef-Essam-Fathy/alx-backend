@@ -4,6 +4,7 @@ This module provides a function to calculate the start and end indices
 for paginated results.
 """
 import csv
+import math
 from typing import List, Tuple
 
 
@@ -25,14 +26,16 @@ def index_range(page: int, page_size: int) -> Tuple[int, int]:
 
 
 class Server:
-    """Server class to paginate a database of popular baby names."""
+    """Server class to paginate a database of popular baby names.
+    """
     DATA_FILE = "Popular_Baby_Names.csv"
 
-    def __init__(self) -> None:
+    def __init__(self):
         self.__dataset = None
 
-    def dataset(self) -> List[List[str]]:
-        """Cached dataset."""
+    def dataset(self) -> List[List]:
+        """Cached dataset
+        """
         if self.__dataset is None:
             with open(self.DATA_FILE) as f:
                 reader = csv.reader(f)
@@ -58,8 +61,8 @@ class Server:
         """
         assert isinstance(page, int) and page > 0, "page must be a"
         "positive integer"
-        assert isinstance(page_size, int) and page_size > 0, "page_size must"
-        "be a positive integer"
+        assert isinstance(page_size, int) and page_size > 0, "page_size"
+        "must be a positive integer"
 
         start_idx, end_idx = index_range(page, page_size)
         dataset = self.dataset()
