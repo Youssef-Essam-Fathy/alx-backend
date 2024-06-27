@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
+"""Least Frequently Used caching module.
 """
-LFU caching system
-"""
+from collections import OrderedDict
 
-from collections import defaultdict
 BaseCaching = __import__('base_caching').BaseCaching
 
 
@@ -11,7 +10,7 @@ class LFUCache(BaseCaching):
     """"""
     def __init__(self):
         super().__init__()
-        self.cache_data = defaultdict()
+        self.cache_data = OrderedDict()
         self.keys_freq = []
 
         def __reorder_items(self, mru_key):
