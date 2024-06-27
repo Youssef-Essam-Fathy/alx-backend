@@ -29,7 +29,7 @@ class MRUCache(BaseCaching):
         if key is None or item is None:
             return
         if key in self.cache_data:
-            self.cache_data.move_to_end(key, False)
+            self.cache_data.move_to_end(key)
         elif len(self.cache_data) >= BaseCaching.MAX_ITEMS:
             popped = self.cache_data.popitem(False)
             print("DISCARD: {}".format(popped[0]))
