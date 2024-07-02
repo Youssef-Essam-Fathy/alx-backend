@@ -5,7 +5,7 @@ with internationalization support using Flask-Babel.
 """
 from flask import Flask, render_template, request
 from flask_babel import Babel, gettext as _
-from typing import Any, Dict
+from typing import Dict
 
 users = {
     1: {"name": "Balou", "locale": "fr", "timezone": "Europe/Paris"},
@@ -40,12 +40,23 @@ def get_locale() -> str:
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
-@app.route('/')
-def index() -> Any:
+@app.route('/', strict_slashes=False)
+def index() -> str:
     """
     Render the index page template.
     """
     return render_template('4-index.html')
+
+def get_user() -> Dict | None:
+    """_summary_
+
+    Returns:
+        Dict | None: _description_
+    """
+    request_login_as = request.args.get('login_as')
+    if request_login_as and request_login_as in users:
+        return users[request_login_as]
+    return None
 
 
 if __name__ == "__main__":

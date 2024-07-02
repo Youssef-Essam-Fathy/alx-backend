@@ -5,7 +5,6 @@ with internationalization support using Flask-Babel.
 """
 from flask import Flask, render_template, request
 from flask_babel import Babel
-from typing import Any
 
 
 class Config:
@@ -30,8 +29,8 @@ def get_locale() -> str:
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
-@app.route('/')
-def index() -> Any:
+@app.route('/', strict_slashes=False)
+def index() -> str:
     """
     Render the index page template.
     """

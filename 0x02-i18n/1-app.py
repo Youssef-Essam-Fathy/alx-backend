@@ -3,7 +3,6 @@
 """
 from flask import Flask, render_template
 from flask_babel import Babel
-from typing import Any
 
 
 class Config:
@@ -19,8 +18,8 @@ app.config.from_object(Config)
 babel = Babel(app)
 
 
-@app.route('/')
-def index() -> Any:
+@app.route('/', strict_slashes=False)
+def index() -> str:
     """_summary_
 
     Returns:

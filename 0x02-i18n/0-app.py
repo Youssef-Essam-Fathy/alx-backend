@@ -5,14 +5,13 @@ A basic flask app
 """
 
 from flask import Flask, render_template
-from typing import Any
 
 
 app = Flask(__name__)
 
 
-@app.route('/')
-def index() -> Any:
+@app.route('/', strict_slashes=False)
+def index() -> str:
     """_summary_
 
     Returns:
