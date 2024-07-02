@@ -77,7 +77,8 @@ def get_locale() -> Optional[str]:
     4. Default locale
 
     Returns:
-        Optional[str]: The best matching language code from the supported languages,
+        Optional[str]: The best matching language code
+        from the supported languages,
         or None if no match is found.
     """
     locale = request.args.get('locale')
@@ -98,10 +99,12 @@ def hello_world() -> str:
     """
     user = g.user
     if user:
-        message = _('You are logged in as %(username)s.', username=user['name'])
+        message = _('You are logged in as %(username)s.',
+                    username=user['name'])
     else:
         message = _('You are not logged in.')
-    return render_template('6-index.html', locale=get_locale(), message=message)
+    return render_template('6-index.html', locale=get_locale(),
+                           message=message)
 
 
 if __name__ == "__main__":
