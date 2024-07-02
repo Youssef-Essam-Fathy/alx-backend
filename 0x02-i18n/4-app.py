@@ -27,6 +27,9 @@ def get_locale() -> str:
     """
     Determine the best match language based on Accept-Language header.
     """
+    request_locale = request.args.get('locale')
+    if request_locale and request_locale in app.config['LANGUAGES']:
+        return request_locale
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
@@ -35,7 +38,7 @@ def index() -> Any:
     """
     Render the index page template.
     """
-    return render_template('3-index.html')
+    return render_template('4-index.html')
 
 
 if __name__ == "__main__":
