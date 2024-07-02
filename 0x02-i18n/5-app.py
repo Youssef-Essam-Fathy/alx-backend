@@ -3,9 +3,9 @@
 This script initializes a Flask application
 with internationalization support using Flask-Babel.
 """
-from flask import Flask, render_template, request
-from flask_babel import Babel, gettext as _
-from typing import Dict
+from flask import Flask, render_template, request, g
+from flask_babel import Babel
+from typing import Dict, Union
 
 users = {
     1: {"name": "Balou", "locale": "fr", "timezone": "Europe/Paris"},
@@ -45,18 +45,23 @@ def index() -> str:
     """
     Render the index page template.
     """
-    return render_template('4-index.html')
+    return render_template('5-index.html')
 
-def get_user() -> Dict | None:
+
+def get_user(id) -> Union[Dict[str, Union[str, None]], None]:
     """_summary_
 
     Returns:
         Dict | None: _description_
     """
-    request_login_as = request.args.get('login_as')
-    if request_login_as and request_login_as in users:
-        return users[request_login_as]
-    return None
+    return users.get(int(id), 0)
+
+
+@app.before_request
+def before_request():
+    """_summary_
+    """
+    setattr(g, 'user', get_user(request.args.get('login_as', 0)))
 
 
 if __name__ == "__main__":
