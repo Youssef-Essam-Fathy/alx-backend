@@ -9,7 +9,12 @@ app = Flask(__name__)
 
 @app.route('/')
 def index() -> Any:
-    return render_template('index.html')
+    """_summary_
+
+    Returns:
+        Any: _description_
+    """
+    return render_template('0-index.html')
 
 
 if __name__ == "__main__":
