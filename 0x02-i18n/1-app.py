@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """_summary_
 """
-from flask import Flask, render_template
+from flask import Flask
 from flask_babel import Babel
 
 class Config:
